@@ -1,7 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-class Mainframe extends JFrame{
+class Mainframe implements ActionListener{
+    //for second way we can implement Actionlistener to our mainframe
     private JFrame frame;
     private JPanel panel;
     private JLabel label;
@@ -14,7 +17,7 @@ class Mainframe extends JFrame{
     private void initialize(){
         frame = new JFrame();
         frame.setTitle("Action event");
-        frame.setSize(400, 400);
+        frame.setSize(800, 400);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setLayout(new BorderLayout(10, 10));
@@ -24,6 +27,16 @@ class Mainframe extends JFrame{
         textField = new JTextField(20);
         button = new JButton("save");
 
+        //first method for adding action listener:
+        /*button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("button clicked");
+            }
+        });*/
+
+        button.addActionListener(this);
+
         panel.add(label);
         panel.add(textField);
         panel.add(button);
@@ -32,6 +45,12 @@ class Mainframe extends JFrame{
     }
     public void show(){
         this.frame.setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String enter_text = textField.getText();
+        System.out.println(enter_text);
     }
 }
 
